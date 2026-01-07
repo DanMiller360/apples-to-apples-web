@@ -1,0 +1,16 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+	modules: ['@nuxt/hints', '@nuxt/eslint'],
+	devtools: { enabled: true },
+	compatibilityDate: '2025-07-15',
+	eslint: {
+		config: {
+			stylistic: {
+				semi: false,
+				quotes: 'single',
+				commaDangle: 'always-multiline',
+				indent: 'tab',
+			},
+		},
+	},
+})
