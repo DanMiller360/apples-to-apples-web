@@ -2,7 +2,11 @@
 	<header class="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-md border-b border-border">
 		<div class="container mx-auto px-6 h-16 flex items-center justify-between">
 			<div class="flex items-center gap-3">
-				<img src="/logo.svg" alt="Logo" class="w-8 h-8 text-foreground">
+				<img
+					src="/logo.png"
+					alt="Logo"
+					class="w-30 h-20 text-foreground"
+				>
 				<div class="text-xl font-semibold text-foreground">
 					Apples to Apples
 				</div>

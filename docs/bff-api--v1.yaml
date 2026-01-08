@@ -1,0 +1,288 @@
+openapi: 3.0.1
+info:
+  title: API | v1
+  version: 1.0.0
+servers:
+  - url: https://localhost:7113
+  - url: http://localhost:5007
+paths:
+  /system/ping:
+    get:
+      tags:
+        - SystemEndpoints
+      responses:
+        "200":
+          description: OK
+  /system/version:
+    get:
+      tags:
+        - SystemEndpoints
+      responses:
+        "200":
+          description: OK
+  /categories:
+    get:
+      tags:
+        - CategoryEndpoints
+      summary: Fetch all supported categories
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CategoryResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    post:
+      tags:
+        - CategoryEndpoints
+      summary: Create a new category [ADMIN USE ONLY]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoryRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /categories/{id}:
+    patch:
+      tags:
+        - CategoryEndpoints
+      summary: Update existing category [ADMIN USE ONLY]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoryRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    delete:
+      tags:
+        - CategoryEndpoints
+      summary: Delete existing category [ADMIN USE ONLY]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /search:
+    post:
+      tags:
+        - SearchEndpoints
+      summary: Search for products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SearchResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /search-and-compare:
+    post:
+      tags:
+        - SearchEndpoints
+      summary: Search and compare products
+      description: Search for products and compare them based on calculated scores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ComparisonResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+components:
+  schemas:
+    CategoryRequest:
+      required:
+        - name
+        - filter
+        - context
+      type: object
+      properties:
+        name:
+          type: string
+        filter:
+          type: string
+        context:
+          type: string
+    CategoryResponse:
+      required:
+        - id
+        - name
+        - filter
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        filter:
+          type: string
+    ComparisonResponse:
+      required:
+        - title
+        - price
+        - priceScore
+        - featureScore
+        - reliabilityScore
+        - overallScore
+        - reasoning
+        - productUrl
+        - gallery
+      type: object
+      properties:
+        title:
+          type: string
+        price:
+          type: number
+          format: float
+        priceScore:
+          type: number
+          format: float
+        featureScore:
+          type: number
+          format: float
+        reliabilityScore:
+          type: number
+          format: float
+        overallScore:
+          type: number
+          format: float
+        reasoning:
+          type: string
+        productUrl:
+          type: string
+        gallery:
+          $ref: "#/components/schemas/Gallery"
+    Gallery:
+      required:
+        - images
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            type: string
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+    SearchRequest:
+      required:
+        - categoryId
+        - maxBudget
+      type: object
+      properties:
+        categoryId:
+          type: string
+        maxBudget:
+          type: integer
+          format: int32
+    SearchResponse:
+      required:
+        - title
+        - productUrl
+      type: object
+      properties:
+        title:
+          type: string
+        productUrl:
+          type: string
+tags:
+  - name: SystemEndpoints
+  - name: CategoryEndpoints
+  - name: SearchEndpoints
