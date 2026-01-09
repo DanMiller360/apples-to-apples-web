@@ -1,4 +1,5 @@
 import type { CategoryResponse } from '~/types/category'
+import type { SearchRequest, ComparisonResponse } from '~/types/search'
 
 /**
  * Composable for BFF API integration
@@ -38,6 +39,15 @@ export const useApi = () => {
 		// Category Endpoints
 		categories: {
 			getAll: () => apiFetch<CategoryResponse[]>('v1/categories'),
+		},
+
+		// Search Endpoints
+		search: {
+			searchAndCompare: (request: SearchRequest) =>
+				apiFetch<ComparisonResponse[]>('v1/search-and-compare', {
+					method: 'POST',
+					body: JSON.stringify(request),
+				}),
 		},
 	}
 }

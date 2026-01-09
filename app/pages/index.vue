@@ -58,6 +58,14 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Budget Dialog -->
+		<BudgetDialog
+			:is-open="showBudgetDialog"
+			:category-name="selectedCategory?.name || ''"
+			@close="closeBudgetDialog"
+			@submit="handleBudgetSubmit"
+		/>
 	</div>
 </template>
 
@@ -68,6 +76,8 @@ const api = useApi()
 const categories = ref<CategoryResponse[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
+const showBudgetDialog = ref(false)
+const selectedCategory = ref<CategoryResponse | null>(null)
 
 const fetchCategories = async () => {
 	loading.value = true
@@ -84,8 +94,27 @@ const fetchCategories = async () => {
 }
 
 const selectCategory = (category: CategoryResponse) => {
-	console.log('Selected category:', category)
-	// TODO: Navigate to search page or open search modal
+	selectedCategory.value = category
+	showBudgetDialog.value = true
+}
+
+const closeBudgetDialog = () => {
+	showBudgetDialog.value = false
+	selectedCategory.value = null
+}
+
+const handleBudgetSubmit = (budget: number) => {
+	if (selectedCategory.value) {
+		navigateTo({
+			path: '/compare',
+			query: {
+				categoryId: selectedCategory.value.id,
+				categoryName: selectedCategory.value.name,
+				budget: budget.toString(),
+			},
+		})
+	}
+	closeBudgetDialog()
 }
 
 // Fetch categories on mount
