@@ -15,6 +15,9 @@ export interface ComparisonResponse {
 	reliabilityScore: number
 	overallScore: number
 	reasoning: string
+	brandSummary: string
+	featureSummary: string
+	reviewSummary: string
 	productUrl: string
 	gallery: Gallery
 }

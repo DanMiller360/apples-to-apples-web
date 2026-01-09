@@ -20,7 +20,7 @@ paths:
       responses:
         "200":
           description: OK
-  /categories:
+  /v1/categories:
     get:
       tags:
         - CategoryEndpoints
@@ -63,7 +63,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
-  /categories/{id}:
+  /v1/categories/{id}:
     patch:
       tags:
         - CategoryEndpoints
@@ -116,7 +116,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
-  /search:
+  /v1/search:
     post:
       tags:
         - SearchEndpoints
@@ -142,7 +142,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
-  /search-and-compare:
+  /v1/search-and-compare:
     post:
       tags:
         - SearchEndpoints
@@ -176,6 +176,7 @@ components:
         - name
         - filter
         - context
+        - icon
       type: object
       properties:
         name:
@@ -184,11 +185,14 @@ components:
           type: string
         context:
           type: string
+        icon:
+          type: string
     CategoryResponse:
       required:
         - id
         - name
         - filter
+        - icon
       type: object
       properties:
         id:
@@ -196,6 +200,8 @@ components:
         name:
           type: string
         filter:
+          type: string
+        icon:
           type: string
     ComparisonResponse:
       required:
@@ -206,6 +212,9 @@ components:
         - reliabilityScore
         - overallScore
         - reasoning
+        - brandSummary
+        - featureSummary
+        - reviewSummary
         - productUrl
         - gallery
       type: object
@@ -228,6 +237,12 @@ components:
           type: number
           format: float
         reasoning:
+          type: string
+        brandSummary:
+          type: string
+        featureSummary:
+          type: string
+        reviewSummary:
           type: string
         productUrl:
           type: string
