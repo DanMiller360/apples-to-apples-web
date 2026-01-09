@@ -5,7 +5,7 @@
 				<img
 					src="/logo.png"
 					alt="Logo"
-					class="w-30 h-20 text-foreground"
+					class="w-20 h-20 text-foreground"
 				>
 				<div class="text-xl font-semibold text-foreground">
 					Apples to Apples

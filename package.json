@@ -12,6 +12,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@iconify-json/material-symbols-light": "^1.2.51",
     "@nuxt/eslint": "^1.12.1",
     "@nuxt/hints": "^1.0.0-alpha.5",
     "@nuxt/icon": "^2.2.0",

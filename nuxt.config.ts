@@ -30,7 +30,7 @@ export default defineNuxtConfig({
 	},
 	icon: {
 		serverBundle: {
-			collections: ['iconoir', 'solar', 'material-symbols-light'],
+			collections: ['material-symbols-light'],
 		},
 	},
 	shadcn: {
