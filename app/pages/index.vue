@@ -1,6 +1,5 @@
 <template>
 	<div class="min-h-screen bg-gradient-to-br from-primary/60 via-accent/70 to-background/100">
-		<HeaderBar />
 		<div class="container mx-auto px-6 pt-24 pb-12">
 			<div class="max-w-4xl mx-auto">
 				<div class="text-center mb-12">
@@ -25,25 +24,12 @@
 				</div>
 
 				<!-- Error State -->
-				<div
+				<ErrorState
 					v-else-if="error"
-					class="text-center py-12"
-				>
-					<div class="bg-destructive/10 text-destructive rounded-lg p-6 max-w-md mx-auto">
-						<p class="font-semibold mb-2">
-							Failed to load categories
-						</p>
-						<p class="text-sm">
-							{{ error }}
-						</p>
-						<Button
-							class="mt-4"
-							@click="fetchCategories"
-						>
-							Try Again
-						</Button>
-					</div>
-				</div>
+					title="Failed to load categories"
+					:message="error"
+					@retry="fetchCategories"
+				/>
 
 				<!-- Categories Grid -->
 				<div
@@ -60,9 +46,6 @@
 							<h3 class="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
 								{{ category.name }}
 							</h3>
-							<div class="mt-2 text-sm text-muted-foreground line-clamp-2">
-								{{ category.filter }}
-							</div>
 						</div>
 						<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
 					</button>
