@@ -6,4 +6,5 @@ export interface CategoryResponse {
 	id: string
 	name: string
 	filter: string
+	icon: string
 }

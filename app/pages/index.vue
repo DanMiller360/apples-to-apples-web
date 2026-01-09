@@ -42,7 +42,13 @@
 						class="group relative overflow-hidden bg-card/80 backdrop-blur-sm hover:bg-card transition-all duration-200 rounded-lg p-6 border-2 border-border hover:border-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 shadow-md hover:shadow-xl"
 						@click="selectCategory(category)"
 					>
-						<div class="flex flex-col items-center justify-center h-full min-h-[120px]">
+						<div class="flex flex-col items-center justify-center h-full min-h-[120px] gap-3">
+							<Icon
+								v-if="category.icon"
+								:name="category.icon"
+								size="48"
+								class="text-primary group-hover:scale-110 transition-transform"
+							/>
 							<h3 class="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
 								{{ category.name }}
 							</h3>

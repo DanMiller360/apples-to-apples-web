@@ -3,7 +3,7 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-	modules: ['@nuxt/hints', '@nuxt/eslint', 'shadcn-nuxt'],
+	modules: ['@nuxt/hints', '@nuxt/eslint', 'shadcn-nuxt', '@nuxt/icon'],
 	devtools: { enabled: true },
 	css: ['~/assets/css/tailwind.css', '~/assets/css/index.css'],
 	runtimeConfig: {
@@ -26,6 +26,11 @@ export default defineNuxtConfig({
 				commaDangle: 'always-multiline',
 				indent: 'tab',
 			},
+		},
+	},
+	icon: {
+		serverBundle: {
+			collections: ['iconoir', 'solar', 'material-symbols-light'],
 		},
 	},
 	shadcn: {
