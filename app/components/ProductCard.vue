@@ -154,12 +154,12 @@
 						<div class="flex items-center gap-1.5 px-3 py-2">
 							<Icon
 								name="material-symbols-light:verified-outline"
-								size="14"
+								size="16"
 								class="text-amber-600/70 dark:text-amber-400/70 flex-shrink-0"
 							/>
-							<span class="font-semibold text-xs text-foreground">Brand & Reliability</span>
+							<span class="font-semibold text-sm text-foreground">Brand & Reliability</span>
 						</div>
-						<div class="px-3 pb-2 text-xs text-muted-foreground leading-relaxed">
+						<div class="px-3 pb-3 text-sm text-muted-foreground leading-relaxed">
 							{{ product.brandSummary }}
 						</div>
 					</div>
@@ -169,12 +169,12 @@
 						<div class="flex items-center gap-1.5 px-3 py-2">
 							<Icon
 								name="material-symbols-light:tune-rounded"
-								size="14"
+								size="16"
 								class="text-indigo-600/70 dark:text-indigo-400/70 flex-shrink-0"
 							/>
-							<span class="font-semibold text-xs text-foreground">Key Features</span>
+							<span class="font-semibold text-sm text-foreground">Key Features</span>
 						</div>
-						<div class="px-3 pb-2 text-xs text-muted-foreground leading-relaxed">
+						<div class="px-3 pb-3 text-sm text-muted-foreground leading-relaxed">
 							{{ product.featureSummary }}
 						</div>
 					</div>
@@ -184,12 +184,12 @@
 						<div class="flex items-center gap-1.5 px-3 py-2">
 							<Icon
 								name="material-symbols-light:rate-review-outline"
-								size="14"
+								size="16"
 								class="text-rose-600/70 dark:text-rose-400/70 flex-shrink-0"
 							/>
-							<span class="font-semibold text-xs text-foreground">Customer Reviews</span>
+							<span class="font-semibold text-sm text-foreground">Customer Reviews</span>
 						</div>
-						<div class="px-3 pb-2 text-xs text-muted-foreground leading-relaxed">
+						<div class="px-3 pb-3 text-sm text-muted-foreground leading-relaxed">
 							{{ product.reviewSummary }}
 						</div>
 					</div>
