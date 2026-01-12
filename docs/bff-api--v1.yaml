@@ -177,6 +177,7 @@ components:
         - filter
         - context
         - icon
+        - group
       type: object
       properties:
         name:
@@ -187,12 +188,15 @@ components:
           type: string
         icon:
           type: string
+        group:
+          type: string
     CategoryResponse:
       required:
         - id
         - name
         - filter
         - icon
+        - group
       type: object
       properties:
         id:
@@ -202,6 +206,8 @@ components:
         filter:
           type: string
         icon:
+          type: string
+        group:
           type: string
     ComparisonResponse:
       required:

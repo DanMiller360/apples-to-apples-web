@@ -7,4 +7,5 @@ export interface CategoryResponse {
 	name: string
 	filter: string
 	icon: string
+	group: string
 }
