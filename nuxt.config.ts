@@ -13,10 +13,16 @@ export default defineNuxtConfig({
 		},
 	},
 	compatibilityDate: '2025-07-15',
+	nitro: {
+		preset: 'cloudflare-pages',
+	},
 	vite: {
 		plugins: [
 			tailwindcss(),
 		],
+		build: {
+			sourcemap: false,
+		},
 	},
 	eslint: {
 		config: {
