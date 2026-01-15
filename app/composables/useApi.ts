@@ -30,6 +30,10 @@ export const useApi = () => {
 			return await response.json()
 		}
 		catch (error) {
+			// Don't log abort errors as they're intentional
+			if (error instanceof Error && error.name === 'AbortError') {
+				throw error
+			}
 			console.error(`API Error [${endpoint}]:`, error)
 			throw error
 		}
@@ -38,15 +42,16 @@ export const useApi = () => {
 	return {
 		// Category Endpoints
 		categories: {
-			getAll: () => apiFetch<CategoryResponse[]>('v1/categories'),
+			getAll: (signal?: AbortSignal) => apiFetch<CategoryResponse[]>('v1/categories', { signal }),
 		},
 
 		// Search Endpoints
 		search: {
-			searchAndCompare: (request: SearchRequest) =>
+			searchAndCompare: (request: SearchRequest, signal?: AbortSignal) =>
 				apiFetch<ComparisonResponse[]>('v1/search-and-compare', {
 					method: 'POST',
 					body: JSON.stringify(request),
+					signal,
 				}),
 		},
 	}

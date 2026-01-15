@@ -94,6 +94,9 @@ const products = ref<ComparisonResponse[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
 
+// AbortController for canceling requests
+let abortController: AbortController | null = null
+
 const formatBudget = computed(() => {
 	return new Intl.NumberFormat('en-ZA', {
 		style: 'currency',
@@ -110,6 +113,14 @@ const fetchProducts = async () => {
 		return
 	}
 
+	// Cancel any previous request
+	if (abortController) {
+		abortController.abort()
+	}
+
+	// Create new abort controller for this request
+	abortController = new AbortController()
+
 	loading.value = true
 	error.value = null
 
@@ -117,12 +128,16 @@ const fetchProducts = async () => {
 		products.value = await api.search.searchAndCompare({
 			categoryId: categoryId.value,
 			maxBudget: budget.value,
-		})
+		}, abortController.signal)
 
 		// Sort by overall score descending
 		products.value.sort((a, b) => b.overallScore - a.overallScore)
 	}
 	catch (err) {
+		// Ignore abort errors
+		if (err instanceof Error && err.name === 'AbortError') {
+			return
+		}
 		error.value = err instanceof Error ? err.message : 'An unknown error occurred'
 	}
 	finally {
@@ -133,5 +148,12 @@ const fetchProducts = async () => {
 // Fetch products on mount
 onMounted(() => {
 	fetchProducts()
+})
+
+// Cancel request on unmount
+onUnmounted(() => {
+	if (abortController) {
+		abortController.abort()
+	}
 })
 </script>
