@@ -9,9 +9,9 @@
 			</div>
 
 			<!-- Image + Info Section -->
-			<div class="flex gap-5 mb-5">
+			<div class="flex flex-col lg:flex-row gap-5 mb-5">
 				<!-- Product Image Carousel - Left Side -->
-				<div class="relative w-80 h-80 bg-white rounded-lg flex-shrink-0 flex items-center justify-center p-4 border border-border/50">
+				<div class="relative w-full lg:w-80 h-64 lg:h-80 bg-white rounded-lg flex-shrink-0 flex items-center justify-center p-4 border border-border/50">
 					<div class="relative w-full h-full group">
 						<!-- Images -->
 						<div
@@ -88,57 +88,57 @@
 				</div>
 
 				<!-- Info Next to Image -->
-				<div class="flex-1 flex flex-col justify-between space-y-4">
+				<div class="flex-1 flex flex-col justify-between space-y-3 lg:space-y-4">
 					<!-- Price -->
 					<div>
 						<div class="flex items-baseline gap-2">
-							<span class="text-3xl font-bold text-primary">
+							<span class="text-2xl lg:text-3xl font-bold text-primary">
 								{{ formatPrice(product.price) }}
 							</span>
 						</div>
 					</div>
 
 					<!-- Scores Grid -->
-					<div class="grid grid-cols-3 gap-2">
-						<div class="bg-blue-50/50 dark:bg-blue-950/20 rounded-lg p-2 text-center border border-blue-200/30 dark:border-blue-800/30">
-							<div class="text-xs font-medium text-muted-foreground mb-0.5">
+					<div class="grid grid-cols-3 gap-1.5 lg:gap-2">
+						<div class="bg-blue-50/50 dark:bg-blue-950/20 rounded-lg p-1.5 lg:p-2 text-center border border-blue-200/30 dark:border-blue-800/30">
+							<div class="text-[10px] lg:text-xs font-medium text-muted-foreground mb-0.5">
 								Price
 							</div>
-							<div class="text-lg font-bold text-blue-600 dark:text-blue-400">
+							<div class="text-base lg:text-lg font-bold text-blue-600 dark:text-blue-400">
 								{{ product.priceScore.toFixed(1) }}
 							</div>
 						</div>
-						<div class="bg-purple-50/50 dark:bg-purple-950/20 rounded-lg p-2 text-center border border-purple-200/30 dark:border-purple-800/30">
-							<div class="text-xs font-medium text-muted-foreground mb-0.5">
+						<div class="bg-purple-50/50 dark:bg-purple-950/20 rounded-lg p-1.5 lg:p-2 text-center border border-purple-200/30 dark:border-purple-800/30">
+							<div class="text-[10px] lg:text-xs font-medium text-muted-foreground mb-0.5">
 								Features
 							</div>
-							<div class="text-lg font-bold text-purple-600 dark:text-purple-400">
+							<div class="text-base lg:text-lg font-bold text-purple-600 dark:text-purple-400">
 								{{ product.featureScore.toFixed(1) }}
 							</div>
 						</div>
-						<div class="bg-emerald-50/50 dark:bg-emerald-950/20 rounded-lg p-2 text-center border border-emerald-200/30 dark:border-emerald-800/30">
-							<div class="text-xs font-medium text-muted-foreground mb-0.5">
+						<div class="bg-emerald-50/50 dark:bg-emerald-950/20 rounded-lg p-1.5 lg:p-2 text-center border border-emerald-200/30 dark:border-emerald-800/30">
+							<div class="text-[10px] lg:text-xs font-medium text-muted-foreground mb-0.5">
 								Reliability
 							</div>
-							<div class="text-lg font-bold text-emerald-600 dark:text-emerald-400">
+							<div class="text-base lg:text-lg font-bold text-emerald-600 dark:text-emerald-400">
 								{{ product.reliabilityScore.toFixed(1) }}
 							</div>
 						</div>
 					</div>
 
 					<!-- AI Recommendation -->
-					<div class="bg-primary/5 rounded-lg p-3 border border-primary/10 flex-1">
+					<div class="bg-primary/5 rounded-lg p-2.5 lg:p-3 border border-primary/10 flex-1">
 						<div class="flex items-start gap-2 mb-1.5">
 							<Icon
 								name="material-symbols-light:lightbulb-outline"
 								size="16"
 								class="text-primary mt-0.5 flex-shrink-0"
 							/>
-							<h4 class="font-bold text-foreground text-sm">
+							<h4 class="font-bold text-foreground text-xs lg:text-sm">
 								AI Recommendation
 							</h4>
 						</div>
-						<p class="text-sm text-foreground/70 leading-relaxed">
+						<p class="text-xs lg:text-sm text-foreground/70 leading-relaxed">
 							{{ product.reasoning }}
 						</p>
 					</div>
