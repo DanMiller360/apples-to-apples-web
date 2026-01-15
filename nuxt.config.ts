@@ -7,9 +7,8 @@ export default defineNuxtConfig({
 	devtools: { enabled: true },
 	css: ['~/assets/css/tailwind.css', '~/assets/css/index.css'],
 	runtimeConfig: {
-		apiSecret: '',
 		public: {
-			apiBase: '',
+			bffApiBase: '',
 		},
 	},
 	compatibilityDate: '2025-07-15',

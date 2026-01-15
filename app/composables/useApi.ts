@@ -7,14 +7,14 @@ import type { SearchRequest, ComparisonResponse } from '~/types/search'
  */
 export const useApi = () => {
 	const config = useRuntimeConfig()
-	const apiBase = config.public.apiBase
+	const bffApiBase = config.public.bffApiBase
 
 	/**
 	 * Generic fetch wrapper with error handling
 	 */
 	const apiFetch = async <T>(endpoint: string, options?: RequestInit): Promise<T> => {
 		try {
-			const response = await fetch(`${apiBase}${endpoint}`, {
+			const response = await fetch(`${bffApiBase}${endpoint}`, {
 				...options,
 				headers: {
 					'Content-Type': 'application/json',
