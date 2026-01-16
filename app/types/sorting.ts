@@ -16,13 +16,13 @@ export const sortOptions: SortOptionInfo[] = [
 	},
 	{
 		value: 'price',
-		label: 'Price',
+		label: 'Value for Money',
 		icon: 'material-symbols-light:payments-rounded',
 		description: 'Best value for money',
 	},
 	{
 		value: 'features',
-		label: 'Features',
+		label: 'Feature Set',
 		icon: 'material-symbols-light:category-rounded',
 		description: 'Most features',
 	},
