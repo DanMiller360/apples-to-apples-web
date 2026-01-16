@@ -11,7 +11,7 @@
 			<!-- Image + Info Section -->
 			<div class="flex flex-col lg:flex-row gap-5 mb-5">
 				<!-- Product Image Carousel - Left Side -->
-				<div class="relative w-full lg:w-80 h-64 lg:h-80 bg-white rounded-lg flex-shrink-0 flex items-center justify-center p-4 border border-border/50">
+				<div class="relative w-full lg:w-80 h-64 lg:h-80 bg-white dark:bg-gray-900 rounded-lg flex-shrink-0 flex items-center justify-center p-4 border border-border/50">
 					<div class="relative w-full h-full group">
 						<!-- Images -->
 						<div
@@ -103,45 +103,45 @@
 
 					<!-- Scores Grid -->
 					<div class="grid grid-cols-3 gap-1.5 lg:gap-2">
-						<div class="bg-blue-50/50 dark:bg-blue-950/20 rounded-lg p-1.5 lg:p-2 text-center border border-blue-200/30 dark:border-blue-800/30">
-							<div class="text-[10px] lg:text-xs font-medium text-muted-foreground mb-0.5">
+						<div class="bg-blue-50 dark:bg-blue-950/40 rounded-lg p-1.5 lg:p-2 text-center border border-blue-200/50 dark:border-blue-700/50">
+							<div class="text-[10px] lg:text-xs font-medium text-blue-700 dark:text-blue-300 mb-0.5">
 								Price
 							</div>
-							<div class="text-base lg:text-lg font-bold text-blue-600 dark:text-blue-400">
+							<div class="text-base lg:text-lg font-bold text-blue-600 dark:text-blue-300">
 								{{ product.priceScore.toFixed(1) }}
 							</div>
 						</div>
-						<div class="bg-purple-50/50 dark:bg-purple-950/20 rounded-lg p-1.5 lg:p-2 text-center border border-purple-200/30 dark:border-purple-800/30">
-							<div class="text-[10px] lg:text-xs font-medium text-muted-foreground mb-0.5">
+						<div class="bg-purple-50 dark:bg-purple-950/40 rounded-lg p-1.5 lg:p-2 text-center border border-purple-200/50 dark:border-purple-700/50">
+							<div class="text-[10px] lg:text-xs font-medium text-purple-700 dark:text-purple-300 mb-0.5">
 								Features
 							</div>
-							<div class="text-base lg:text-lg font-bold text-purple-600 dark:text-purple-400">
+							<div class="text-base lg:text-lg font-bold text-purple-600 dark:text-purple-300">
 								{{ product.featureScore.toFixed(1) }}
 							</div>
 						</div>
-						<div class="bg-emerald-50/50 dark:bg-emerald-950/20 rounded-lg p-1.5 lg:p-2 text-center border border-emerald-200/30 dark:border-emerald-800/30">
-							<div class="text-[10px] lg:text-xs font-medium text-muted-foreground mb-0.5">
+						<div class="bg-emerald-50 dark:bg-emerald-950/40 rounded-lg p-1.5 lg:p-2 text-center border border-emerald-200/50 dark:border-emerald-700/50">
+							<div class="text-[10px] lg:text-xs font-medium text-emerald-700 dark:text-emerald-300 mb-0.5">
 								Reliability
 							</div>
-							<div class="text-base lg:text-lg font-bold text-emerald-600 dark:text-emerald-400">
+							<div class="text-base lg:text-lg font-bold text-emerald-600 dark:text-emerald-300">
 								{{ product.reliabilityScore.toFixed(1) }}
 							</div>
 						</div>
 					</div>
 
 					<!-- AI Recommendation -->
-					<div class="bg-primary/5 rounded-lg p-2.5 lg:p-3 border border-primary/10 flex-1">
+					<div class="bg-primary/10 dark:bg-primary/20 rounded-lg p-2.5 lg:p-3 border border-primary/20 dark:border-primary/30 flex-1">
 						<div class="flex items-start gap-2 mb-1.5">
 							<Icon
 								name="material-symbols-light:lightbulb-outline"
 								size="16"
-								class="text-primary mt-0.5 flex-shrink-0"
+								class="text-primary dark:text-primary/90 mt-0.5 flex-shrink-0"
 							/>
 							<h4 class="font-bold text-foreground text-xs lg:text-sm">
 								AI Recommendation
 							</h4>
 						</div>
-						<p class="text-xs lg:text-sm text-foreground/70 leading-relaxed">
+						<p class="text-xs lg:text-sm text-foreground/80 dark:text-foreground/90 leading-relaxed">
 							{{ product.reasoning }}
 						</p>
 					</div>
@@ -153,46 +153,46 @@
 				<!-- Details in Subtle Colored Cards -->
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-2">
 					<!-- Brand Summary -->
-					<div class="bg-amber-50/50 dark:bg-amber-950/10 rounded-lg overflow-hidden border border-amber-200/30 dark:border-amber-800/20">
+					<div class="bg-amber-50 dark:bg-amber-950/30 rounded-lg overflow-hidden border border-amber-200/50 dark:border-amber-700/50">
 						<div class="flex items-center gap-1.5 px-3 py-2">
 							<Icon
 								name="material-symbols-light:verified-outline"
 								size="16"
-								class="text-amber-600/70 dark:text-amber-400/70 flex-shrink-0"
+								class="text-amber-600 dark:text-amber-400 flex-shrink-0"
 							/>
 							<span class="font-semibold text-sm text-foreground">Brand & Reliability</span>
 						</div>
-						<div class="px-3 pb-3 text-sm text-muted-foreground leading-relaxed">
+						<div class="px-3 pb-3 text-sm text-amber-900/80 dark:text-amber-100/80 leading-relaxed">
 							{{ product.brandSummary }}
 						</div>
 					</div>
 
 					<!-- Feature Summary -->
-					<div class="bg-indigo-50/50 dark:bg-indigo-950/10 rounded-lg overflow-hidden border border-indigo-200/30 dark:border-indigo-800/20">
+					<div class="bg-indigo-50 dark:bg-indigo-950/30 rounded-lg overflow-hidden border border-indigo-200/50 dark:border-indigo-700/50">
 						<div class="flex items-center gap-1.5 px-3 py-2">
 							<Icon
 								name="material-symbols-light:tune-rounded"
 								size="16"
-								class="text-indigo-600/70 dark:text-indigo-400/70 flex-shrink-0"
+								class="text-indigo-600 dark:text-indigo-400 flex-shrink-0"
 							/>
 							<span class="font-semibold text-sm text-foreground">Key Features</span>
 						</div>
-						<div class="px-3 pb-3 text-sm text-muted-foreground leading-relaxed">
+						<div class="px-3 pb-3 text-sm text-indigo-900/80 dark:text-indigo-100/80 leading-relaxed">
 							{{ product.featureSummary }}
 						</div>
 					</div>
 
 					<!-- Review Summary -->
-					<div class="bg-rose-50/50 dark:bg-rose-950/10 rounded-lg overflow-hidden border border-rose-200/30 dark:border-rose-800/20">
+					<div class="bg-rose-50 dark:bg-rose-950/30 rounded-lg overflow-hidden border border-rose-200/50 dark:border-rose-700/50">
 						<div class="flex items-center gap-1.5 px-3 py-2">
 							<Icon
 								name="material-symbols-light:rate-review-outline"
 								size="16"
-								class="text-rose-600/70 dark:text-rose-400/70 flex-shrink-0"
+								class="text-rose-600 dark:text-rose-400 flex-shrink-0"
 							/>
 							<span class="font-semibold text-sm text-foreground">Customer Reviews</span>
 						</div>
-						<div class="px-3 pb-3 text-sm text-muted-foreground leading-relaxed">
+						<div class="px-3 pb-3 text-sm text-rose-900/80 dark:text-rose-100/80 leading-relaxed">
 							{{ product.reviewSummary }}
 						</div>
 					</div>
