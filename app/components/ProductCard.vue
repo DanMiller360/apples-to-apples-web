@@ -16,7 +16,10 @@
 						<!-- Images -->
 						<div
 							v-if="product.gallery.images.length > 0"
-							class="relative w-full h-full"
+							class="relative w-full h-full touch-pan-y"
+							@touchstart="handleTouchStart"
+							@touchmove="handleTouchMove"
+							@touchend="handleTouchEnd"
 						>
 							<img
 								v-for="(image, index) in product.gallery.images"
@@ -224,6 +227,44 @@ const props = defineProps<{
 }>()
 
 const currentImageIndex = ref(0)
+
+// Touch swipe handling
+let touchStartX = 0
+let touchEndX = 0
+const minSwipeDistance = 50
+
+const handleTouchStart = (e: TouchEvent) => {
+	const touch = e.changedTouches[0]
+	if (touch) {
+		touchStartX = touch.screenX
+	}
+}
+
+const handleTouchMove = (e: TouchEvent) => {
+	const touch = e.changedTouches[0]
+	if (touch) {
+		touchEndX = touch.screenX
+	}
+}
+
+const handleTouchEnd = () => {
+	const swipeDistance = touchStartX - touchEndX
+
+	if (Math.abs(swipeDistance) > minSwipeDistance) {
+		if (swipeDistance > 0) {
+			// Swiped left - go to next image
+			nextImage()
+		}
+		else {
+			// Swiped right - go to previous image
+			previousImage()
+		}
+	}
+
+	// Reset values
+	touchStartX = 0
+	touchEndX = 0
+}
 
 const nextImage = () => {
 	if (props.product.gallery.images.length > 0) {
