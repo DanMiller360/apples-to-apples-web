@@ -64,16 +64,47 @@
 					</Button>
 				</div>
 
-				<!-- Products Grid -->
-				<div
-					v-else
-					class="grid grid-cols-1 lg:grid-cols-2 gap-8"
-				>
-					<ProductCard
-						v-for="(product, index) in products"
-						:key="index"
-						:product="product"
-					/>
+				<!-- Products Grid with Sorting -->
+				<div v-else>
+					<!-- Sort Controls -->
+					<div class="mb-6 bg-card/80 backdrop-blur-sm rounded-lg border border-border shadow-md p-4">
+						<div class="flex items-center justify-between flex-wrap gap-4">
+							<div class="flex items-center gap-2">
+								<Icon
+									name="material-symbols-light:sort-rounded"
+									size="20"
+									class="text-muted-foreground"
+								/>
+								<span class="text-sm font-medium text-muted-foreground">Sort by:</span>
+							</div>
+							<div class="flex flex-wrap gap-2">
+								<Button
+									v-for="option in sortOptions"
+									:key="option.value"
+									:variant="sortBy === option.value ? 'default' : 'outline'"
+									size="sm"
+									class="transition-all"
+									@click="sortBy = option.value"
+								>
+									<Icon
+										:name="option.icon"
+										class="mr-2"
+										size="16"
+									/>
+									{{ option.label }}
+								</Button>
+							</div>
+						</div>
+					</div>
+
+					<!-- Products Grid -->
+					<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+						<ProductCard
+							v-for="(product, index) in sortedProducts"
+							:key="index"
+							:product="product"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -82,6 +113,8 @@
 
 <script setup lang="ts">
 import type { ComparisonResponse } from '~/types/search'
+import type { SortOption } from '~/types/sorting'
+import { sortOptions } from '~/types/sorting'
 
 const route = useRoute()
 const api = useApi()
@@ -93,6 +126,7 @@ const budget = ref<number>(Number(route.query.budget) || 0)
 const products = ref<ComparisonResponse[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
+const sortBy = ref<SortOption>('overall')
 
 // AbortController for canceling requests
 let abortController: AbortController | null = null
@@ -104,6 +138,24 @@ const formatBudget = computed(() => {
 		minimumFractionDigits: 0,
 		maximumFractionDigits: 0,
 	}).format(budget.value)
+})
+
+const sortedProducts = computed(() => {
+	const productsCopy = [...products.value]
+
+	return productsCopy.sort((a, b) => {
+		switch (sortBy.value) {
+			case 'price':
+				return b.priceScore - a.priceScore
+			case 'features':
+				return b.featureScore - a.featureScore
+			case 'reliability':
+				return b.reliabilityScore - a.reliabilityScore
+			case 'overall':
+			default:
+				return b.overallScore - a.overallScore
+		}
+	})
 })
 
 const fetchProducts = async () => {
@@ -129,9 +181,6 @@ const fetchProducts = async () => {
 			categoryId: categoryId.value,
 			maxBudget: budget.value,
 		}, abortController.signal)
-
-		// Sort by overall score descending
-		products.value.sort((a, b) => b.overallScore - a.overallScore)
 	}
 	catch (err) {
 		// Ignore abort errors
