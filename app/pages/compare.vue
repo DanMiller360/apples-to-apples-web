@@ -100,8 +100,8 @@
 					<!-- Products Grid -->
 					<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 						<ProductCard
-							v-for="(product, index) in sortedProducts"
-							:key="index"
+							v-for="product in sortedProducts"
+							:key="`${product.title}-${product.price}-${sortBy}`"
 							:product="product"
 						/>
 					</div>
