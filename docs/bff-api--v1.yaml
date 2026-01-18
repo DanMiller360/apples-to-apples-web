@@ -212,6 +212,7 @@ components:
     ComparisonResponse:
       required:
         - title
+        - listingPrice
         - price
         - priceScore
         - featureScore
@@ -227,6 +228,9 @@ components:
       properties:
         title:
           type: string
+        listingPrice:
+          type: number
+          format: float
         price:
           type: number
           format: float
@@ -241,7 +245,7 @@ components:
           format: float
         overallScore:
           type: number
-          format: float
+          format: double
         reasoning:
           type: string
         brandSummary:

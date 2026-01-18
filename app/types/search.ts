@@ -9,6 +9,7 @@ export interface Gallery {
 
 export interface ComparisonResponse {
 	title: string
+	listingPrice: number
 	price: number
 	priceScore: number
 	featureScore: number

@@ -94,10 +94,27 @@
 				<div class="flex-1 flex flex-col justify-between space-y-3 lg:space-y-4">
 					<!-- Price -->
 					<div>
-						<div class="flex items-baseline gap-2">
-							<span class="text-2xl lg:text-3xl font-bold text-primary">
-								{{ formatPrice(product.price) }}
+						<div class="flex flex-col gap-1">
+							<!-- Listing Price (Original Price) with strikethrough -->
+							<span
+								v-if="product.listingPrice && product.listingPrice > product.price"
+								class="text-sm lg:text-base text-muted-foreground line-through"
+							>
+								{{ formatPrice(product.listingPrice) }}
 							</span>
+							<!-- Current Price -->
+							<div class="flex items-baseline gap-2">
+								<span class="text-2xl lg:text-3xl font-bold text-primary">
+									{{ formatPrice(product.price) }}
+								</span>
+								<!-- Discount Badge -->
+								<span
+									v-if="product.listingPrice && product.listingPrice > product.price"
+									class="text-xs lg:text-sm font-semibold text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-950/50 px-2 py-0.5 rounded"
+								>
+									{{ calculateDiscount(product.listingPrice, product.price) }}% OFF
+								</span>
+							</div>
 						</div>
 					</div>
 
@@ -285,6 +302,11 @@ const formatPrice = (price: number) => {
 		minimumFractionDigits: 0,
 		maximumFractionDigits: 0,
 	}).format(price)
+}
+
+const calculateDiscount = (listingPrice: number, actualPrice: number) => {
+	const discount = ((listingPrice - actualPrice) / listingPrice) * 100
+	return Math.round(discount)
 }
 
 const getScoreColor = (score: number) => {
