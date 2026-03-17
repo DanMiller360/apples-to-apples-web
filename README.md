@@ -69,29 +69,23 @@ The system aggregates data from online retailers (currently Takealot), processes
 ## Architecture
 
 ```mermaid
-graph LR
-    FE[Nuxt Frontend<br/>SSR/CSR]
-    BE[.NET 9 Backend]
-    DB[(MongoDB Atlas)]
-    N8N[n8n Workflow]
-    GROQ[Groq AI]
-    TAL[Takealot API]
-    
-    FE -->|REST API| BE
-    BE -->|Fetch Products| TAL
-    BE -->|Store/Fetch| DB
-    BE -->|Trigger Workflow| N8N
-    N8N -->|LLM Request| GROQ
-    GROQ -->|AI Summary| N8N
-    N8N -->|Results| BE
-    BE -->|Response| FE
-    
-    style FE fill:#1976D2,stroke:#1976D2,stroke-width:2px
-    style BE fill:#5E35B1,stroke:#5E35B1,stroke-width:2px
-    style N8N fill:#C2185B,stroke:#C2185B,stroke-width:2px
-    style DB fill:#388E3C,stroke:#388E3C,stroke-width:2px
-    style GROQ fill:#F57C00,stroke:#F57C00,stroke-width:2px
-    style TAL fill:#F9A825,stroke:#F9A825,stroke-width:2px
+graph TD
+    User["User (Browser)"]
+    Frontend["Nuxt Frontend<br/>(Cloudflare)"]
+    Backend["BFF API<br/>(.NET 9 / Azure)"]
+    Mongo["MongoDB Atlas"]
+    Takealot["Takealot API"]
+    N8N["n8n Workflows<br/>(Raspberry Pi)"]
+    Cloudflare["Cloudflare Tunnel"]
+    Groq["Groq LLM"]
+
+    User <--> Frontend
+    Frontend <--> Backend
+    Backend <--> Mongo
+    Backend <--> Takealot
+    Backend <--> Cloudflare
+    Cloudflare <--> N8N
+    N8N <--> Groq
 ```
 
 **Infrastructure**: Cloudflare Pages (Frontend) • Azure (Backend) • MongoDB Atlas (Database) • Raspberry Pi + Cloudflare Tunnel (n8n)
